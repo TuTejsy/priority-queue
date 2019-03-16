@@ -30,6 +30,13 @@ class Node {
 	remove() {
 		if (this.parent) {
 			this.parent.removeChild(this);
+		} else {
+			if(this.right) {
+				this.right.parent = null;
+				this.left.parent = null;
+			} else if (this.left) this.left.parent = null;
+
+			this.root = null;
 		}
 	}
 

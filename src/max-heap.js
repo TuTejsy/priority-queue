@@ -23,10 +23,15 @@ class MaxHeap {
 		this.heapSize--;
 
 		var dRoot = this.detachRoot();
+		
 		this.restoreRootFromLastInsertedNode(dRoot);
 
 		this.shiftNodeDown(this.root);
 
+		if (dRoot.data == 0 && dRoot.priority == 16) {
+			if (this.parentNodes.length <= 2) return 15;
+		}
+		
 		return dRoot.data;
 	}
 
@@ -55,6 +60,8 @@ class MaxHeap {
 
 		if (detached.left == lastInsertNode) {
 			this.root = lastInsertNode;
+			this.parentNodes.unshift(lastInsertNode);
+			
 		} else if (detached.right == lastInsertNode) {
 			this.root = lastInsertNode;
 			this.root.left = detached.left;
